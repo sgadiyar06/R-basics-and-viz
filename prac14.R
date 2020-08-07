@@ -7,6 +7,8 @@ west <- c('Western Europe','Northern Europe','Southern Europe','Northern America
           'Australia and New Zealand')
 
 past_year <- 1970
+present_year <- 2010
+
 
 gapminder <- gapminder %>% 
   mutate(dollar_per_day = gdp/population/365)
@@ -20,7 +22,6 @@ p <- gapminder %>%
   facet_grid(.~group)
 
 
-present_year <- 2010
 
 q <- gapminder %>%
   filter(year %in% c(past_year,present_year) & !is.na(gdp)) %>%

@@ -5,6 +5,18 @@ data("gapminder")
 
 gapminder <- gapminder %>% 
   mutate(dollars_per_day = gdp/population/365)
+past_year <- 1970
+present_year <- 2010
+
+
+country_list1 <- gapminder %>% 
+  filter(year == past_year & !is.na(dollars_per_day)) %>% .$country
+
+country_list2 <- gapminder %>% 
+  filter(year == present_year & !is.na(dollars_per_day)) %>% .$country
+
+country_list <- intersect(country_list1,country_list2)
+
 
 tab <-gapminder %>%
   filter(year == past_year & country %in% country_list) %>%
@@ -37,6 +49,8 @@ gapminder <- gapminder %>%
 # reorder factor levels
 gapminder <- gapminder %>%
   mutate(group = factor(group, levels = c("Others", "Latin America", "East Asia", "Sub-Saharan Africa", "West")))
+
+
 
 r <- gapminder %>%
   filter(year %in% c(past_year, present_year) & country %in% country_list) %>%
